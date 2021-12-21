@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Asana Task url to ID tag</string>
+	<key>operationDescriptors</key>
+	<array>
+		<dict>
+			<key>className</key>
+			<string>PTHPastebotFilterOperationDescriptorShell</string>
+			<key>scriptString</key>
+			<string>#!/bin/bash
+input=$(cat)
+FIELDS=($(echo $input \
+ | awk '{split($0, arr, /[\/\@:]*/); for (x in arr) { print arr[x] }}'))
+taskID=${FIELDS[3]}
+
+echo -n "[#${taskID}]"</string>
+		</dict>
+	</array>
+</dict>
+</plist>
